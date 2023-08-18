@@ -183,9 +183,8 @@ bool MapSaver::saveMapTopicToFile(
 
     rclcpp::QoS map_qos(10);  // initialize to default
     if (map_subscribe_transient_local_) {
-      map_qos.transient_local();
-      map_qos.reliable();
-      map_qos.keep_last(1);
+      map_qos.best_effort();  // 使用 best-effort QoS 策略
+      map_qos.keep_all(); 
     }
 
     // Create new CallbackGroup for map_sub
